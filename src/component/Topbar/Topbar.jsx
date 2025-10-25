@@ -23,7 +23,7 @@ const Topbar = () => {
     return (
         <div className='topbar'>
             <div className="dropdown">
-                <button className="btn btn-register dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <button className="btn btn-language dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                     <i className='bx bx-world'></i> {currentLang.flag} {currentLang.name}
                 </button>
                 <ul className="dropdown-menu">
