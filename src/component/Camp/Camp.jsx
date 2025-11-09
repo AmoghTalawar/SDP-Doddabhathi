@@ -124,9 +124,9 @@ function Camp({
         <table className="table">
           <thead className="table-header">
             <tr>
-              <th scope="col">{t('patientId', language)}</th>
-              <th scope="col">{t('patient', language)}</th>
-              <th scope="col"></th>
+              <th scope="col">Patient ID</th>
+              <th scope="col">Patient Name</th>
+              <th scope="col">Status</th>
             </tr>
           </thead>
           <tbody className="table-body">
@@ -146,13 +146,11 @@ function Camp({
                       <p>{translatedData.translatedName || data.name}</p>
                     </td>
                     <td>
-                      {" "}
-                      {data?.unallocatedPatientsList?.map((patientId, k) => {
-                        for (var i of unallocatedPatients) {
-                          console.log("i: ", i);
-                          if (patientId == i.value) return <p key={k}>{i.label}</p>;
-                        }
-                      })}{" "}
+                      <div className="patient-list">
+                        {unallocatedPatients.length > 0 && (
+                          <p className="allocation-status">Allocated</p>
+                        )}
+                      </div>
                     </td>
                   </motion.tr>
                 );
