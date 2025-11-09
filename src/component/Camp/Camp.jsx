@@ -4,6 +4,7 @@ import axios from "axios";
 import { GET_CAMP, GET_FACULTY, GET_LOCATIONS } from "../../utils/apiConstant";
 import { useLanguage } from "../../context/LanguageContext";
 import { t } from "../../translations";
+import { motion } from "framer-motion";
 
 function Camp({
   setLoading,
@@ -79,7 +80,12 @@ function Camp({
   };
 
   return (
-    <div className="content">
+    <motion.div
+      className="content"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.6 }}
+    >
       <PatientModal
         showModal={showModal}
         setShowModal={setShowModal}
@@ -90,23 +96,36 @@ function Camp({
         unallocatedPatients={unallocatedPatients}
         faculties={faculty}
       />
-      <div className="header">
-        <h4>{t('nonAllocatedPatients', language)}</h4>
-        <button className="add-btn" onClick={openModal}>
-          {t('allocatePatient', language)}
-        </button>
-      </div>
 
-      <div className="table-div">
-        <table class="table">
+      <motion.div
+        className="header"
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.2 }}
+      >
+        <h4>{t('nonAllocatedPatients', language)}</h4>
+        <motion.button
+          className="add-btn"
+          onClick={openModal}
+          whileHover={{ scale: 1.05, y: -2 }}
+          whileTap={{ scale: 0.95 }}
+          transition={{ duration: 0.2 }}
+        >
+          {t('allocatePatient', language)}
+        </motion.button>
+      </motion.div>
+
+      <motion.div
+        className="table-div"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.4 }}
+      >
+        <table className="table">
           <thead className="table-header">
             <tr>
               <th scope="col">{t('patientId', language)}</th>
-              {/* <th scope="col">Name</th> */}
-              {/* <th scope="col">Location</th> */}
               <th scope="col">{t('patient', language)}</th>
-              {/* <th scope="col">Start Date</th>
-              <th scope="col">End Date</th> */}
               <th scope="col"></th>
             </tr>
           </thead>
@@ -115,60 +134,33 @@ function Camp({
               unallocatedPatientsList.filter(data => data).map((data, key) => {
                 const translatedData = translatedPatients?.find(tp => tp._id === data._id) || data;
                 return (
-                  <tr key={key}>
+                  <motion.tr
+                    key={key}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.4, delay: key * 0.1 }}
+                    whileHover={{ scale: 1.01, backgroundColor: 'rgba(16, 185, 129, 0.05)' }}
+                  >
                     <th scope="row">{data.patientId}</th>
                     <td>
                       <p>{translatedData.translatedName || data.name}</p>
                     </td>
-
-                    {
-                      /* <td>
-                      <p>
-                        {location &&
-                          location?.map((d, k) => {
-                            if (d._id == (data.locationId || '')) return <>{d.name}</>;
-                          })}
-                      </p>
-                    </td>*/
-                      <td>
-                        {" "}
-                        {data?.unallocatedPatientsList?.map((patientId, k) => {
-                          for (var i of unallocatedPatients) {
-                            console.log("i: ", i);
-                            if (patientId == i.value) return <p key={k}>{i.label}</p>;
-                          }
-                        })}{" "}
-                      </td>
-                    }
-                    {/* <td>
-                      <p>{data.startDate.split("T")[0]}</p>
-                    </td>
-
                     <td>
-                      <p>{data.endDate.split("T")[0]}</p>
-
-                      {/* {data.createdAt.setDate(data.createdAt.getDate() + 7).split("T")[0]} 
-                    </td> */}
-
-                    {/* <td>
-                      <button
-                        className="edit-btn"
-                        onClick={(e) => {
-                          e.preventDefault();
-                          setData(data);
-                          openModal();
-                        }}
-                      >
-                        <i class="bi bi-pencil-square"></i>
-                      </button>
-                    </td> */}
-                  </tr>
+                      {" "}
+                      {data?.unallocatedPatientsList?.map((patientId, k) => {
+                        for (var i of unallocatedPatients) {
+                          console.log("i: ", i);
+                          if (patientId == i.value) return <p key={k}>{i.label}</p>;
+                        }
+                      })}{" "}
+                    </td>
+                  </motion.tr>
                 );
               })}
           </tbody>
         </table>
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 }
 

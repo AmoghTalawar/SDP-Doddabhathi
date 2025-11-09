@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./Dashboard.scss";
+import { motion } from "framer-motion";
 
 import axios from "axios";
 
@@ -27,6 +28,7 @@ function Dashboard() {
   const currentDate = new Date().toISOString();
 
   const [loading, setLoading] = useState(false);
+  const [isLoggingOut, setIsLoggingOut] = useState(false);
 
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -123,6 +125,22 @@ function Dashboard() {
     setSearchQuery("");
   };
 
+  const handleLogout = async () => {
+    setIsLoggingOut(true);
+    try {
+      // Add a small delay for smooth transition
+      await new Promise(resolve => setTimeout(resolve, 300));
+      localStorage.clear();
+      navigate("/");
+    } catch (error) {
+      console.error("Logout error:", error);
+      localStorage.clear();
+      navigate("/");
+    } finally {
+      setIsLoggingOut(false);
+    }
+  };
+
   const filteredPatients = patientData.filter((data) => {
     if (!data || !data.name) return false;
     const name = data.name.toLowerCase();
@@ -209,23 +227,45 @@ function Dashboard() {
   // );
 
   return (
-    <div className="patientData">
-      <div className="header">
-        <i
-          class="bi bi-arrow-left-square-fill"
-          onClick={() => {
-            localStorage.clear();
-            navigate("/login");
-          }}
-        ></i>
-      </div>
-      <div className="patient-list">
+    <motion.div
+      className="patientData"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.6 }}
+    >
+      <motion.div
+        className="header"
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.2 }}
+      >
+        <motion.i
+          class={`bi bi-arrow-left-square-fill ${isLoggingOut ? 'logging-out' : ''}`}
+          onClick={handleLogout}
+          disabled={isLoggingOut}
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.95 }}
+          transition={{ duration: 0.2 }}
+        ></motion.i>
+      </motion.div>
+
+      <motion.div
+        className="patient-list"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.4 }}
+      >
         <div className="header">
           <h6>{t('patientsList', language)}</h6>
           <div className="buttons1">
-            <button onClick={() => navigate(`/patientAdd/${locationId}`)}>
+            <motion.button
+              onClick={() => navigate(`/patientAdd/${locationId}`)}
+              whileHover={{ scale: 1.05, y: -2 }}
+              whileTap={{ scale: 0.95 }}
+              transition={{ duration: 0.2 }}
+            >
               {t('addPatient', language)}
-            </button>
+            </motion.button>
 
             <div className="input-wrap1">
               <i className="fas fa-search"></i>
@@ -242,36 +282,60 @@ function Dashboard() {
             </div>
           </div>
         </div>
-      </div>
+      </motion.div>
+
       {filteredPatients.length != 0 ? (
-        <div className="patient-list">
-          {/* <div className="header">
-            <h6>Patients List</h6>
-            <button onClick={() => navigate(`/patientAdd/${locationId}`)}>
-              Add Patient
-            </button>
-          </div> */}
+        <motion.div
+          className="patient-list"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6, delay: 0.6 }}
+        >
           {filteredPatients.map((data, key) => {
             const translatedData = translatedPatients?.find(tp => tp._id === data._id) || data;
             return (
-              <div className="patient">
+              <motion.div
+                className="patient"
+                key={data._id}
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.4, delay: key * 0.1 }}
+                whileHover={{ scale: 1.02, x: 5 }}
+              >
                 <p>
                   {translatedData.translatedName || data.name} - ({translatedData.translatedAddress || data.address}), {translatedData.translatedDate || data.createdAt.split("T")[0]}{" "}
                 </p>
                 <div className="controls">
-                  <button onClick={() => navigate(`/patient/${data._id}`)}>
+                  <motion.button
+                    onClick={() => navigate(`/patient/${data._id}`)}
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
+                    transition={{ duration: 0.2 }}
+                  >
                     <i class="bi bi-eye"></i>
-                  </button>
-                  <button onClick={() => navigate(`/patient/${data._id}`)}>
+                  </motion.button>
+                  <motion.button
+                    onClick={() => navigate(`/patient/${data._id}`)}
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
+                    transition={{ duration: 0.2 }}
+                  >
                     <i class="bi bi-pencil-square"></i>
-                  </button>
+                  </motion.button>
                 </div>
-              </div>
+              </motion.div>
             );
           })}
-        </div>
+        </motion.div>
       ) : (
-        <p className="no-patient">No Patients To Display</p>
+        <motion.p
+          className="no-patient"
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.4, delay: 0.8 }}
+        >
+          No Patients To Display
+        </motion.p>
       )}
 
       {/* <div className="prediction-buttons">
@@ -284,7 +348,7 @@ function Dashboard() {
           <button>Quality Of Lfe Prediction</button>
         </div>
       </div> */}
-    </div>
+    </motion.div>
   );
 }
 

@@ -3,6 +3,7 @@ import { ADD_PATIENT, GET_TRUCK } from "../../utils/apiConstant";
 import { useNavigate } from "react-router-dom";
 
 import "./Patient.scss";
+import { motion } from "framer-motion";
 
 import axios from "axios";
 import { useLanguage } from "../../context/LanguageContext";
@@ -157,41 +158,46 @@ function Patient({ setLoading, camp, patient, faculty }) {
   }) : [];
 
   return (
-    <div className="content">
-      <div className="header">
+    <motion.div
+      className="content"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.6 }}
+    >
+      <motion.div
+        className="header"
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.2 }}
+      >
         <h4>{t('patientData', language)}</h4>
-      </div>
-      <div className="buttons">
-        <button
+      </motion.div>
+
+      <motion.div
+        className="buttons"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.4 }}
+      >
+        <motion.button
           className="add-btn"
           onClick={(e) => downloadData(e.target.value)}
+          whileHover={{ scale: 1.05, y: -2 }}
+          whileTap={{ scale: 0.95 }}
+          transition={{ duration: 0.2 }}
         >
           {t('downloadCsv', language)}
-        </button>
+        </motion.button>
 
-        <button className="add-btn" onClick={handleAddPatient}>
+        <motion.button
+          className="add-btn"
+          onClick={handleAddPatient}
+          whileHover={{ scale: 1.05, y: -2 }}
+          whileTap={{ scale: 0.95 }}
+          transition={{ duration: 0.2 }}
+        >
           {t('addPatient', language)}
-        </button>
-
-        {/* <input
-        type="text"
-        placeholder="Search patients..."
-        value={searchQuery}
-        onChange={handleSearchChange}
-        className="search-input" // Add styling as needed
-      /> */}
-
-        {/* <input
-        onChange={handleSearchChange}
-        value={searchQuery}
-        type="text"
-        name="product-search"
-        id="product-search"
-        placeholder="Search Patients"
-      />
-      <i onClick={handleClearBtn} className="fas fa-times"></i>
-      
-       */}
+        </motion.button>
 
         <div className="input-wrap">
           <i className="fas fa-search"></i>
@@ -206,7 +212,7 @@ function Patient({ setLoading, camp, patient, faculty }) {
           />
           <i onClick={handleClearBtn} className="fas fa-times"></i>
         </div>
-      </div>
+      </motion.div>
 
       {/* <div className="table-div">
         <table class="table">
@@ -257,7 +263,12 @@ function Patient({ setLoading, camp, patient, faculty }) {
         </table>
       </div> */}
 
-      <div className="table-div">
+      <motion.div
+        className="table-div"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.6 }}
+      >
         <table className="table">
           <thead className="table-header">
             <tr>
@@ -273,7 +284,13 @@ function Patient({ setLoading, camp, patient, faculty }) {
               filteredPatients.map((data, key) => {
                 const translatedData = translatedPatients?.find(tp => tp._id === data._id) || data;
                 return (
-                  <tr key={key}>
+                  <motion.tr
+                    key={key}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.4, delay: key * 0.1 }}
+                    whileHover={{ scale: 1.01, backgroundColor: 'rgba(16, 185, 129, 0.05)' }}
+                  >
                     <th scope="row">{data.patientId}</th>
                     <td>
                       {faculty && faculty.length > 0 ? (
@@ -289,27 +306,34 @@ function Patient({ setLoading, camp, patient, faculty }) {
                     <td>{translatedData.translatedName || data.name}</td>
                     <td>{translatedData.translatedPhone || data.phone}</td>
                     <td>
-                      <button
+                      <motion.button
                         className="edit-btn"
                         onClick={() => navigate(`/patient/${data._id}`)}
+                        whileHover={{ scale: 1.1 }}
+                        whileTap={{ scale: 0.9 }}
+                        transition={{ duration: 0.2 }}
                       >
                         <i className="bi bi-eye"></i>
-                      </button>
+                      </motion.button>
                     </td>
-                  </tr>
+                  </motion.tr>
                 );
               })
             ) : (
-              <tr>
+              <motion.tr
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.4, delay: 0.8 }}
+              >
                 <td colSpan="5" className="text-center">
                   {t('noPatientsFound', language)}
                 </td>
-              </tr>
+              </motion.tr>
             )}
           </tbody>
         </table>
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 }
 

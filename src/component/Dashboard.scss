@@ -1,18 +1,22 @@
 .dashboard{
-    background-color: #11101d;
+    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
     height: auto;
+    min-height: 100vh;
     .sidebar{
         position: fixed;
         top: 0;
         left: 0;
         height: 100%;
-        width: 260px;
-        background: #11101d;
+        width: 280px;
+        background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+        box-shadow: 4px 0 20px rgba(16, 185, 129, 0.1);
+        border-right: 1px solid rgba(16, 185, 129, 0.08);
         z-index: 100;
-        transition: all 0.5s ease;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        backdrop-filter: blur(20px);
       }
       .sidebar.close{
-        width: 78px;
+        width: 80px;
       }
       .sidebar .logo-details{
         height: 60px;
@@ -56,8 +60,14 @@
         list-style: none;
         transition: all 0.4s ease;
       }
-      .sidebar .nav-links li:hover{
-        background: #1d1b31;
+      
+      // Exclude profile-details from general hover effects
+      .sidebar .nav-links li:not(.profile-details-wrapper):hover{
+        background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(14, 165, 233, 0.1) 100%);
+        border-radius: 12px;
+        margin: 4px 8px;
+        transform: translateX(4px);
+        transition: all 0.3s ease;
       }
       .sidebar .nav-links li .iocn-link{
         display: flex;
@@ -72,10 +82,18 @@
         min-width: 78px;
         text-align: center;
         line-height: 50px;
-        color: #fff;
-        font-size: 20px;
+        color: #64748b;
+        font-size: 22px;
         cursor: pointer;
-        transition: all 0.3s ease;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        border-radius: 12px;
+        margin: 4px 8px;
+      }
+
+      .sidebar .nav-links li:hover i{
+        color: #10b981;
+        background: rgba(16, 185, 129, 0.1);
+        transform: scale(1.1);
       }
       .sidebar .nav-links li.showMenu i.arrow{
         transform: rotate(-180deg);
@@ -89,10 +107,16 @@
         text-decoration: none;
       }
       .sidebar .nav-links li a .link_name{
-        font-size: 18px;
-        font-weight: 400;
-        color: #fff;
-        transition: all 0.4s ease;
+        font-size: 16px;
+        font-weight: 500;
+        color: #374151;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        letter-spacing: -0.01em;
+      }
+
+      .sidebar .nav-links li:hover .link_name{
+        color: #10b981;
+        font-weight: 600;
       }
       .sidebar.close .nav-links li a .link_name{
         opacity: 0;
@@ -158,60 +182,165 @@
       .sidebar .profile-details{
         position: fixed;
         bottom: 0;
-        width: 260px;
+        width: 280px;
         display: flex;
         align-items: center;
         justify-content: space-between;
-        background: #1d1b31;
-        padding: 12px 0;
-        transition: all 0.5s ease;
+        background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+        border-top: 1px solid rgba(16, 185, 129, 0.08);
+        padding: 20px 16px;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 0 -4px 20px rgba(16, 185, 129, 0.08);
+        min-height: 80px;
+        // Prevent the general li hover effects from affecting profile
+        transform: none !important;
+        margin: 0 !important;
+        background: inherit !important;
+        border-radius: 0 !important;
       }
+      
+      // Remove hover effects from profile-details that could cause glitching
+      .sidebar .profile-details:hover {
+        background: linear-gradient(135deg, rgba(16, 185, 129, 0.05) 0%, rgba(14, 165, 233, 0.05) 100%);
+        transform: none;
+        margin: 0;
+        border-radius: 16px;
+        transition: all 0.3s ease;
+      }
+      
       .sidebar.close .profile-details{
         background: none;
       }
+      
       .sidebar.close .profile-details{
         width: 78px;
       }
       .sidebar .profile-details .profile-content{
         display: flex;
         align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        width: 48px;
+        height: 48px;
       }
       .sidebar .profile-details img{
-        height: 52px;
-        width: 52px;
+        height: 48px;
+        width: 48px;
         object-fit: cover;
-        border-radius: 16px;
+        border-radius: 14px;
         margin: 0 14px 0 12px;
-        background: #1d1b31;
-        transition: all 0.5s ease;
+        background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+        border: 2px solid rgba(16, 185, 129, 0.2);
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 0 4px 12px rgba(16, 185, 129, 0.15);
+      }
+
+      .sidebar .profile-details img:hover{
+        transform: scale(1.05);
+        border-color: #10b981;
+        box-shadow: 0 6px 20px rgba(16, 185, 129, 0.25);
       }
       .sidebar.close .profile-details img{
         padding: 10px;
       }
+      .sidebar .profile-details .name-job{
+        flex: 1;
+        min-width: 0;
+        margin: 0 12px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+
       .sidebar .profile-details .profile_name,
       .sidebar .profile-details .job{
-        color: #fff;
-        font-size: 18px;
+        color: #374151;
+        font-size: 14px;
         font-weight: 500;
         white-space: nowrap;
+        letter-spacing: -0.01em;
+        line-height: 1.2;
       }
+
+      .sidebar .profile-details .profile_name{
+        color: #10b981;
+        font-weight: 600;
+        font-size: 15px;
+      }
+
+      .sidebar .profile-details .job{
+        font-size: 12px;
+        opacity: 0.8;
+      }
+
       .sidebar.close .profile-details i,
       .sidebar.close .profile-details .profile_name,
       .sidebar.close .profile-details .job{
         display: none;
       }
-      .sidebar .profile-details .job{
-        font-size: 12px;
+
+      .sidebar .profile-details i.bx-log-out {
+        font-size: 24px;
+        color: #64748b;
+        cursor: pointer;
+        padding: 8px;
+        border-radius: 8px;
+        transition: color 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+        background: rgba(255, 255, 255, 0.8);
+        backdrop-filter: blur(10px);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+
+        &:hover {
+          color: #ef4444;
+          background: rgba(239, 68, 68, 0.1);
+          box-shadow: 0 4px 16px rgba(239, 68, 68, 0.2);
+        }
+
+        &.logging-out {
+          animation: logoutPulse 0.6s ease-in-out;
+          pointer-events: none;
+        }
+      
+        @keyframes logoutPulse {
+          0%, 100% {
+            transform: scale(1);
+            opacity: 1;
+          }
+          50% {
+            transform: scale(1.2);
+            opacity: 0.7;
+          }
+        }
+      
+      }
+      .sidebar .profile-details .profile-content i.bi-person-fill {
+        font-size: 32px;
+        color: #10b981;
+        background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(14, 165, 233, 0.1) 100%);
+        padding: 12px;
+        border-radius: 12px;
+        transition: all 0.3s ease;
+
+        &.logging-out {
+          animation: logoutPulse 0.6s ease-in-out;
+        }
       }
       .home-section{
         position: relative;
-        background: #dbdbdb;
+        background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
         min-height: 100vh;
-        left: 260px;
-        width: calc(100% - 260px);
-        transition: all 0.5s ease;
-        border-bottom-left-radius: 40px;
-        border-top-left-radius: 40px;
+        left: 280px;
+        width: calc(100% - 280px);
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        border-bottom-left-radius: 32px;
+        border-top-left-radius: 32px;
+        box-shadow: -8px 0 32px rgba(16, 185, 129, 0.08);
       }
       .sidebar.close ~ .home-section{
         left: 78px;

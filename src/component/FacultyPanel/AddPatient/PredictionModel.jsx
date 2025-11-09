@@ -22,10 +22,23 @@ function PredictionModels() {
 
   return (
     <div className="prediction-buttons">
-      <div class="controls">
-        <button onClick={onCLickHandle}>{t('soberPeriodPrediction', language)}</button>
-        <button onClick={aaoHandle}>{t('aaiPrediction', language)}</button>
-        <button onClick={riskLevelHandle}>{t('riskLevelPrediction', language)}</button>
+      <div className="prediction-header">
+        <h3>{t('predictionModel', language)}</h3>
+        <p>Choose a prediction model to analyze patient data</p>
+      </div>
+      <div className="controls">
+        <button onClick={onCLickHandle}>
+          <i></i>
+          {t('soberPeriodPrediction', language)}
+        </button>
+        <button onClick={aaoHandle}>
+          <i></i>
+          {t('aaiPrediction', language)}
+        </button>
+        <button onClick={riskLevelHandle}>
+          <i></i>
+          {t('riskLevelPrediction', language)}
+        </button>
       </div>
     </div>
   );

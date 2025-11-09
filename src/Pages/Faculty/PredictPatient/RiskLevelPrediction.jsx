@@ -106,672 +106,773 @@ const RiskLevelPrediction = () => {
   };
 
   return (
-    <div class="question-box">
+    <div className="question-box">
       <div className="header1">
         <i
-          class="bi bi-arrow-left-square-fill"
+          className="bi bi-arrow-left-square-fill"
           onClick={() => {
             localStorage.clear();
             navigate(-1);
           }}
         ></i>
       </div>
-      <form onSubmit={handleSubmit}>
-        <div class="question">
-          <label>{t('reasonToStartAlcohol', language)}</label>
-          <div>
-            <input
-              type="checkbox"
-              name="R_to avoid problems and sadness"
-              //   value="0"
-              checked={formData["R_to avoid problems and sadness"]}
-              onChange={handleInputChange}
-            />{" "}
-            {t('toAvoidProblemsAndSadness', language)}
-          </div>
-
-          <div>
-            <input
-              type="checkbox"
-              name="R_to feel better/confident/happy"
-              //   value="0"
-              checked={formData["R_to feel better/confident/happy"]}
-              onChange={handleInputChange}
-            />{" "}
-            {t('toFeelBetterConfidentHappy', language)}
-          </div>
-
-          <div>
-            <input
-              type="checkbox"
-              name="R_to try"
-              //   value="0"
-              checked={formData["R_to try"]}
-              onChange={handleInputChange}
-            />{" "}
-            {t('toTry', language)}
+      
+      <div className="form-container">
+        <div className="page-header">
+          <div className="header-icon">⚠️</div>
+          <h1>{t('riskLevelPrediction', language)}</h1>
+          <p className="subtitle">Assess alcohol-related risk levels for targeted interventions</p>
+          <div className="instructions">
+            <p>
+              <strong>How to use:</strong> Complete all sections by selecting options or entering values.
+              This comprehensive risk assessment helps identify patients who need immediate intervention and support.
+            </p>
           </div>
         </div>
 
-        <div class="question">
-          <label>{t('doYouSmoke', language)}</label>
-          <div>
-            <input
-              type="radio"
-              name="smoking/smokeless"
-              value="0"
-              checked={formData["smoking/smokeless"] === 0}
-              onChange={handleInputChange}
-            />{" "}
-            {t('no', language)}
-          </div>
-
-          <div>
-            <input
-              type="radio"
-              name="smoking/smokeless"
-              value="1"
-              checked={formData["smoking/smokeless"] === 1}
-              onChange={handleInputChange}
-            />{" "}
-            {t('yes', language)}
-          </div>
+        <div className="progress-indicator">
+          <div className="step completed">1</div>
+          <div className="step">2</div>
+          <div className="step">3</div>
+          <div className="step">4</div>
+          <div className="step">5</div>
         </div>
 
-        <div class="question">
-          <label>{t('doYouIntakeNicotine', language)}</label>
-          <div>
-            <input
-              type="radio"
-              name="Nicotine (yes/NO)"
-              value="0"
-              checked={formData["Nicotine (yes/NO)"] === 0}
-              onChange={handleInputChange}
-            />{" "}
-            {t('no', language)}
+        <form onSubmit={handleSubmit}>
+          {/* Reasons to Start Alcohol */}
+          <div className="question-section">
+            <h3 className="section-title">
+              <span className="section-icon">💭</span>
+              {t('reasonToStartAlcohol', language)}
+            </h3>
+            <div className="question">
+              <label>Select all that apply:</label>
+              <div className="input-group">
+                <input
+                  type="checkbox"
+                  name="R_to avoid problems and sadness"
+                  checked={formData["R_to avoid problems and sadness"]}
+                  onChange={handleInputChange}
+                  id="reason-avoid-problems"
+                />
+                <label htmlFor="reason-avoid-problems" className="option">
+                  {t('toAvoidProblemsAndSadness', language)}
+                </label>
+                
+                <input
+                  type="checkbox"
+                  name="R_to feel better/confident/happy"
+                  checked={formData["R_to feel better/confident/happy"]}
+                  onChange={handleInputChange}
+                  id="reason-feel-better"
+                />
+                <label htmlFor="reason-feel-better" className="option">
+                  {t('toFeelBetterConfidentHappy', language)}
+                </label>
+                
+                <input
+                  type="checkbox"
+                  name="R_to try"
+                  checked={formData["R_to try"]}
+                  onChange={handleInputChange}
+                  id="reason-try"
+                />
+                <label htmlFor="reason-try" className="option">
+                  {t('toTry', language)}
+                </label>
+              </div>
+            </div>
           </div>
 
-          <div>
-            <input
-              type="radio"
-              name="Nicotine (yes/NO)"
-              value="1"
-              checked={formData["Nicotine (yes/NO)"] === 1}
-              onChange={handleInputChange}
-            />{" "}
-            {t('yes', language)}
-          </div>
-        </div>
+          {/* Personal Habits */}
+          <div className="question-section">
+            <h3 className="section-title">
+              <span className="section-icon">🚬</span>
+              Personal Habits
+            </h3>
+            
+            <div className="question">
+              <label>{t('doYouSmoke', language)}</label>
+              <div className="input-group">
+                <input
+                  type="radio"
+                  name="smoking/smokeless"
+                  value="0"
+                  checked={formData["smoking/smokeless"] === 0}
+                  onChange={handleInputChange}
+                  id="smoke-no"
+                />
+                <label htmlFor="smoke-no" className="option">
+                  {t('no', language)}
+                </label>
+                
+                <input
+                  type="radio"
+                  name="smoking/smokeless"
+                  value="1"
+                  checked={formData["smoking/smokeless"] === 1}
+                  onChange={handleInputChange}
+                  id="smoke-yes"
+                />
+                <label htmlFor="smoke-yes" className="option">
+                  {t('yes', language)}
+                </label>
+              </div>
+            </div>
 
-        <div class="question">
-          <label>{t('areYouMarried', language)}</label>
-          <div>
-            <input
-              type="radio"
-              name="Marital Status"
-              value="0"
-              checked={formData["Marital Status"] === 0}
-              onChange={handleInputChange}
-            />{" "}
-            {t('no', language)}
-          </div>
-
-          <div>
-            <input
-              type="radio"
-              name="Marital Status"
-              value="1"
-              checked={formData["Marital Status"] === 1}
-              onChange={handleInputChange}
-            />{" "}
-            {t('yes', language)}
-          </div>
-        </div>
-
-        <div class="question">
-          <label>{t('sexualProblem', language)}</label>
-          <div>
-            <input
-              type="radio"
-              name="At present do you have any sexual problem ( if yes mention)"
-              value="0"
-              checked={
-                formData[
-                  "At present do you have any sexual problem ( if yes mention)"
-                ] === 0
-              }
-              onChange={handleInputChange}
-            />{" "}
-            {t('no', language)}
-          </div>
-
-          <div>
-            <input
-              type="radio"
-              name="At present do you have any sexual problem ( if yes mention)"
-              value="1"
-              checked={
-                formData[
-                  "At present do you have any sexual problem ( if yes mention)"
-                ] === 1
-              }
-              onChange={handleInputChange}
-            />{" "}
-            {t('yes', language)}
-          </div>
-        </div>
-
-        <div class="question">
-          <label>{t('legalComplications', language)}</label>
-          <div>
-            <input
-              type="radio"
-              name="Legal complications yes/no"
-              value="0"
-              checked={formData["Legal complications yes/no"] === 0}
-              onChange={handleInputChange}
-            />{" "}
-            {t('no', language)}
+            <div className="question">
+              <label>{t('doYouIntakeNicotine', language)}</label>
+              <div className="input-group">
+                <input
+                  type="radio"
+                  name="Nicotine (yes/NO)"
+                  value="0"
+                  checked={formData["Nicotine (yes/NO)"] === 0}
+                  onChange={handleInputChange}
+                  id="nicotine-no"
+                />
+                <label htmlFor="nicotine-no" className="option">
+                  {t('no', language)}
+                </label>
+                
+                <input
+                  type="radio"
+                  name="Nicotine (yes/NO)"
+                  value="1"
+                  checked={formData["Nicotine (yes/NO)"] === 1}
+                  onChange={handleInputChange}
+                  id="nicotine-yes"
+                />
+                <label htmlFor="nicotine-yes" className="option">
+                  {t('yes', language)}
+                </label>
+              </div>
+            </div>
           </div>
 
-          <div>
-            <input
-              type="radio"
-              name="Legal complications yes/no"
-              value="1"
-              checked={formData["Legal complications yes/no"] === 1}
-              onChange={handleInputChange}
-            />{" "}
-            {t('yes', language)}
-          </div>
-        </div>
+          {/* Social & Living Situation */}
+          <div className="question-section">
+            <h3 className="section-title">
+              <span className="section-icon">🏠</span>
+              Social & Living Situation
+            </h3>
+            
+            <div className="question">
+              <label>{t('areYouMarried', language)}</label>
+              <div className="input-group">
+                <input
+                  type="radio"
+                  name="Marital Status"
+                  value="0"
+                  checked={formData["Marital Status"] === 0}
+                  onChange={handleInputChange}
+                  id="married-no"
+                />
+                <label htmlFor="married-no" className="option">
+                  {t('no', language)}
+                </label>
+                
+                <input
+                  type="radio"
+                  name="Marital Status"
+                  value="1"
+                  checked={formData["Marital Status"] === 1}
+                  onChange={handleInputChange}
+                  id="married-yes"
+                />
+                <label htmlFor="married-yes" className="option">
+                  {t('yes', language)}
+                </label>
+              </div>
+            </div>
 
-        <div class="question">
-          <label>{t('multipleMarriages', language)}</label>
-          <div>
-            <input
-              type="radio"
-              name="multiple marriages"
-              value="0"
-              checked={formData["multiple marriages"] === 0}
-              onChange={handleInputChange}
-            />{" "}
-            {t('no', language)}
-          </div>
+            <div className="question">
+              <label>{t('multipleMarriages', language)}</label>
+              <div className="input-group">
+                <input
+                  type="radio"
+                  name="multiple marriages"
+                  value="0"
+                  checked={formData["multiple marriages"] === 0}
+                  onChange={handleInputChange}
+                  id="multiple-marriages-no"
+                />
+                <label htmlFor="multiple-marriages-no" className="option">
+                  {t('no', language)}
+                </label>
+                
+                <input
+                  type="radio"
+                  name="multiple marriages"
+                  value="1"
+                  checked={formData["multiple marriages"] === 1}
+                  onChange={handleInputChange}
+                  id="multiple-marriages-yes"
+                />
+                <label htmlFor="multiple-marriages-yes" className="option">
+                  {t('yes', language)}
+                </label>
+              </div>
+            </div>
 
-          <div>
-            <input
-              type="radio"
-              name="multiple marriages"
-              value="1"
-              checked={formData["multiple marriages"] === 1}
-              onChange={handleInputChange}
-            />{" "}
-            {t('yes', language)}
-          </div>
-        </div>
-
-        <div class="question">
-          <label>{t('periodOfUnemployment', language)}</label>
-          <div>
-            <input
-              type="radio"
-              name="Did you have any period of unemployment"
-              value="0"
-              checked={
-                formData["Did you have any period of unemployment"] === 0
-              }
-              onChange={handleInputChange}
-            />{" "}
-            {t('no', language)}
-          </div>
-
-          <div>
-            <input
-              type="radio"
-              name="Did you have any period of unemployment"
-              value="1"
-              checked={
-                formData["Did you have any period of unemployment"] === 1
-              }
-              onChange={handleInputChange}
-            />{" "}
-            {t('yes', language)}
-          </div>
-        </div>
-
-        <div class="question">
-          <label>{t('familyViolence', language)}</label>
-          <div>
-            <input
-              type="radio"
-              name="any instance of family violence"
-              value="0"
-              checked={formData["any instance of family violence"] === 0}
-              onChange={handleInputChange}
-            />{" "}
-            {t('no', language)}
-          </div>
-
-          <div>
-            <input
-              type="radio"
-              name="any instance of family violence"
-              value="1"
-              checked={formData["any instance of family violence"] === 1}
-              onChange={handleInputChange}
-            />{" "}
-            {t('yes', language)}
-          </div>
-        </div>
-
-        <div class="question">
-          <label>{t('recordExtraMaritalExperiences', language)}</label>
-          <div>
-            <input
-              type="radio"
-              name="Record extra marital experiences"
-              value="0"
-              checked={formData["Record extra marital experiences"] === 0}
-              onChange={handleInputChange}
-            />{" "}
-            {t('no', language)}
+            <div className="question">
+              <label>{t('doYouLiveWithFamily', language)}</label>
+              <div className="input-group">
+                <input
+                  type="radio"
+                  name="Living arrangement_Family"
+                  value="0"
+                  checked={formData["Living arrangement_Family"] === 0}
+                  onChange={handleInputChange}
+                  id="live-family-no"
+                />
+                <label htmlFor="live-family-no" className="option">
+                  {t('no', language)}
+                </label>
+                
+                <input
+                  type="radio"
+                  name="Living arrangement_Family"
+                  value="1"
+                  checked={formData["Living arrangement_Family"] === 1}
+                  onChange={handleInputChange}
+                  id="live-family-yes"
+                />
+                <label htmlFor="live-family-yes" className="option">
+                  {t('yes', language)}
+                </label>
+              </div>
+            </div>
           </div>
 
-          <div>
-            <input
-              type="radio"
-              name="Record extra marital experiences"
-              value="1"
-              checked={formData["Record extra marital experiences"] === 1}
-              onChange={handleInputChange}
-            />{" "}
-            {t('yes', language)}
-          </div>
-        </div>
+          {/* Health & Medical History */}
+          <div className="question-section">
+            <h3 className="section-title">
+              <span className="section-icon">🏥</span>
+              Health & Medical History
+            </h3>
+            
+            <div className="question">
+              <label>{t('doYouHaveDiabetes', language)}</label>
+              <div className="input-group">
+                <input
+                  type="radio"
+                  name="C_Diabetes"
+                  value="0"
+                  checked={formData["C_Diabetes"] === 0}
+                  onChange={handleInputChange}
+                  id="diabetes-no"
+                />
+                <label htmlFor="diabetes-no" className="option">
+                  {t('no', language)}
+                </label>
+                
+                <input
+                  type="radio"
+                  name="C_Diabetes"
+                  value="1"
+                  checked={formData["C_Diabetes"] === 1}
+                  onChange={handleInputChange}
+                  id="diabetes-yes"
+                />
+                <label htmlFor="diabetes-yes" className="option">
+                  {t('yes', language)}
+                </label>
+              </div>
+            </div>
 
-        <div class="question">
-          <label>{t('familyHistoryOfAlcoholism', language)}</label>
-          <div>
-            <input
-              type="radio"
-              name="Family history of alcoholism / drug abuse, if any (who and which type of drug)"
-              value="0"
-              checked={
-                formData[
-                  "Family history of alcoholism / drug abuse, if any (who and which type of drug)"
-                ] === 0
-              }
-              onChange={handleInputChange}
-            />{" "}
-            {t('no', language)}
-          </div>
+            <div className="question">
+              <label>{t('familyHistoryOfAlcoholism', language)}</label>
+              <div className="input-group">
+                <input
+                  type="radio"
+                  name="Family history of alcoholism / drug abuse, if any (who and which type of drug)"
+                  value="0"
+                  checked={formData["Family history of alcoholism / drug abuse, if any (who and which type of drug)"] === 0}
+                  onChange={handleInputChange}
+                  id="family-history-no"
+                />
+                <label htmlFor="family-history-no" className="option">
+                  {t('no', language)}
+                </label>
+                
+                <input
+                  type="radio"
+                  name="Family history of alcoholism / drug abuse, if any (who and which type of drug)"
+                  value="1"
+                  checked={formData["Family history of alcoholism / drug abuse, if any (who and which type of drug)"] === 1}
+                  onChange={handleInputChange}
+                  id="family-history-yes"
+                />
+                <label htmlFor="family-history-yes" className="option">
+                  {t('yes', language)}
+                </label>
+              </div>
+            </div>
 
-          <div>
-            <input
-              type="radio"
-              name="Family history of alcoholism / drug abuse, if any (who and which type of drug)"
-              value="1"
-              checked={
-                formData[
-                  "Family history of alcoholism / drug abuse, if any (who and which type of drug)"
-                ] === 1
-              }
-              onChange={handleInputChange}
-            />{" "}
-            {t('yes', language)}
-          </div>
-        </div>
+            <div className="question">
+              <label>{t('sexualProblem', language)}</label>
+              <div className="input-group">
+                <input
+                  type="radio"
+                  name="At present do you have any sexual problem ( if yes mention)"
+                  value="0"
+                  checked={formData["At present do you have any sexual problem ( if yes mention)"] === 0}
+                  onChange={handleInputChange}
+                  id="sexual-problem-no"
+                />
+                <label htmlFor="sexual-problem-no" className="option">
+                  {t('no', language)}
+                </label>
+                
+                <input
+                  type="radio"
+                  name="At present do you have any sexual problem ( if yes mention)"
+                  value="1"
+                  checked={formData["At present do you have any sexual problem ( if yes mention)"] === 1}
+                  onChange={handleInputChange}
+                  id="sexual-problem-yes"
+                />
+                <label htmlFor="sexual-problem-yes" className="option">
+                  {t('yes', language)}
+                </label>
+              </div>
+            </div>
 
-        <div class="question">
-          <label>{t('doYouLiveWithFamily', language)}</label>
-          <div>
-            <input
-              type="radio"
-              name="Living arrangement_Family"
-              value="0"
-              checked={formData["Living arrangement_Family"] === 0}
-              onChange={handleInputChange}
-            />{" "}
-            {t('no', language)}
-          </div>
-
-          <div>
-            <input
-              type="radio"
-              name="Living arrangement_Family"
-              value="1"
-              checked={formData["Living arrangement_Family"] === 1}
-              onChange={handleInputChange}
-            />{" "}
-            {t('yes', language)}
-          </div>
-        </div>
-
-        <div class="question">
-          <label>{t('doYouHaveDiabetes', language)}</label>
-          <div>
-            <input
-              type="radio"
-              name="C_Diabetes"
-              value="0"
-              checked={formData["C_Diabetes"] === 0}
-              onChange={handleInputChange}
-            />{" "}
-            {t('no', language)}
-          </div>
-
-          <div>
-            <input
-              type="radio"
-              name="C_Diabetes"
-              value="1"
-              checked={formData["C_Diabetes"] === 1}
-              onChange={handleInputChange}
-            />{" "}
-            {t('yes', language)}
-          </div>
-        </div>
-
-        <div class="question">
-          <label>{t('alcoholWithdrawalSymptomStage', language)}</label>
-          <div>
-            <input
-              type="radio"
-              name="AWS_Stages"
-              value="0"
-              checked={formData["AWS_Stages"] === 0}
-              onChange={handleInputChange}
-            />{" "}
-            {t('stage0', language)}
-          </div>
-
-          <div>
-            <input
-              type="radio"
-              name="AWS_Stages"
-              value="1"
-              checked={formData["AWS_Stages"] === 1}
-              onChange={handleInputChange}
-            />{" "}
-            {t('stage1', language)}
-          </div>
-
-          <div>
-            <input
-              type="radio"
-              name="AWS_Stages"
-              value="2"
-              checked={formData["AWS_Stages"] === 2}
-              onChange={handleInputChange}
-            />{" "}
-            {t('stage2', language)}
+            <div className="question">
+              <label>{t('legalComplications', language)}</label>
+              <div className="input-group">
+                <input
+                  type="radio"
+                  name="Legal complications yes/no"
+                  value="0"
+                  checked={formData["Legal complications yes/no"] === 0}
+                  onChange={handleInputChange}
+                  id="legal-no"
+                />
+                <label htmlFor="legal-no" className="option">
+                  {t('no', language)}
+                </label>
+                
+                <input
+                  type="radio"
+                  name="Legal complications yes/no"
+                  value="1"
+                  checked={formData["Legal complications yes/no"] === 1}
+                  onChange={handleInputChange}
+                  id="legal-yes"
+                />
+                <label htmlFor="legal-yes" className="option">
+                  {t('yes', language)}
+                </label>
+              </div>
+            </div>
           </div>
 
-          <div>
-            <input
-              type="radio"
-              name="AWS_Stages"
-              value="3"
-              checked={formData["AWS_Stages"] === 3}
-              onChange={handleInputChange}
-            />{" "}
-            {t('stage3', language)}
+          {/* Life Events & Challenges */}
+          <div className="question-section">
+            <h3 className="section-title">
+              <span className="section-icon">📋</span>
+              Life Events & Challenges
+            </h3>
+            
+            <div className="question">
+              <label>{t('recordExtraMaritalExperiences', language)}</label>
+              <div className="input-group">
+                <input
+                  type="radio"
+                  name="Record extra marital experiences"
+                  value="0"
+                  checked={formData["Record extra marital experiences"] === 0}
+                  onChange={handleInputChange}
+                  id="extra-marital-no"
+                />
+                <label htmlFor="extra-marital-no" className="option">
+                  {t('no', language)}
+                </label>
+                
+                <input
+                  type="radio"
+                  name="Record extra marital experiences"
+                  value="1"
+                  checked={formData["Record extra marital experiences"] === 1}
+                  onChange={handleInputChange}
+                  id="extra-marital-yes"
+                />
+                <label htmlFor="extra-marital-yes" className="option">
+                  {t('yes', language)}
+                </label>
+              </div>
+            </div>
+
+            <div className="question">
+              <label>{t('periodOfUnemployment', language)}</label>
+              <div className="input-group">
+                <input
+                  type="radio"
+                  name="Did you have any period of unemployment"
+                  value="0"
+                  checked={formData["Did you have any period of unemployment"] === 0}
+                  onChange={handleInputChange}
+                  id="unemployment-no"
+                />
+                <label htmlFor="unemployment-no" className="option">
+                  {t('no', language)}
+                </label>
+                
+                <input
+                  type="radio"
+                  name="Did you have any period of unemployment"
+                  value="1"
+                  checked={formData["Did you have any period of unemployment"] === 1}
+                  onChange={handleInputChange}
+                  id="unemployment-yes"
+                />
+                <label htmlFor="unemployment-yes" className="option">
+                  {t('yes', language)}
+                </label>
+              </div>
+            </div>
+
+            <div className="question">
+              <label>{t('familyViolence', language)}</label>
+              <div className="input-group">
+                <input
+                  type="radio"
+                  name="any instance of family violence"
+                  value="0"
+                  checked={formData["any instance of family violence"] === 0}
+                  onChange={handleInputChange}
+                  id="family-violence-no"
+                />
+                <label htmlFor="family-violence-no" className="option">
+                  {t('no', language)}
+                </label>
+                
+                <input
+                  type="radio"
+                  name="any instance of family violence"
+                  value="1"
+                  checked={formData["any instance of family violence"] === 1}
+                  onChange={handleInputChange}
+                  id="family-violence-yes"
+                />
+                <label htmlFor="family-violence-yes" className="option">
+                  {t('yes', language)}
+                </label>
+              </div>
+            </div>
           </div>
 
-          <div>
-            <input
-              type="radio"
-              name="AWS_Stages"
-              value="4"
-              checked={formData["AWS_Stages"] === 4}
-              onChange={handleInputChange}
-            />{" "}
-            {t('stage4', language)}
-          </div>
-        </div>
-
-        <div class="question">
-          <label>{t('psychiatricComplication', language)}</label>
-          <div>
-            <input
-              type="checkbox"
-              name="Psy_Confusion"
-              //   value="0"
-              checked={formData["Psy_Confusion"]}
-              onChange={handleInputChange}
-            />{" "}
-            {t('confusion', language)}
-          </div>
-
-          <div>
-            <input
-              type="checkbox"
-              name="Psy_Hallucinations"
-              //   value="0"
-              checked={formData["Psy_Hallucinations"]}
-              onChange={handleInputChange}
-            />{" "}
-            {t('hallucinations', language)}
+          {/* Alcohol Withdrawal Symptoms */}
+          <div className="question-section">
+            <h3 className="section-title">
+              <span className="section-icon">⚕️</span>
+              {t('alcoholWithdrawalSymptomStage', language)}
+            </h3>
+            <div className="question">
+              <label>Select the current stage:</label>
+              <div className="input-group">
+                {[0, 1, 2, 3, 4].map((stage) => (
+                  <React.Fragment key={stage}>
+                    <input
+                      type="radio"
+                      name="AWS_Stages"
+                      value={stage}
+                      checked={formData["AWS_Stages"] === stage}
+                      onChange={handleInputChange}
+                      id={`aws-stage-${stage}`}
+                    />
+                    <label htmlFor={`aws-stage-${stage}`} className="option">
+                      {t(`stage${stage}`, language)}
+                    </label>
+                  </React.Fragment>
+                ))}
+              </div>
+            </div>
           </div>
 
-          <div>
-            <input
-              type="checkbox"
-              name="Psy_Aggressive Outbursts"
-              //   value="0"
-              checked={formData["Psy_Aggressive Outbursts"]}
-              onChange={handleInputChange}
-            />{" "}
-            {t('aggressiveOutbursts', language)}
-          </div>
-        </div>
-
-        <div class="question">
-          <label>{t('ace', language)}</label>
-
-          <div>
-            <input
-              type="checkbox"
-              name="ACE_Running away from home"
-              //   value="0"
-              checked={formData["ACE_Running away from home"]}
-              onChange={handleInputChange}
-            />{" "}
-            {t('runningAwayFromHome', language)}
-          </div>
-
-          <div>
-            <input
-              type="checkbox"
-              name="ACE_Broken home or single parenting"
-              //   value="0"
-              checked={formData["ACE_Broken home or single parenting"]}
-              onChange={handleInputChange}
-            />{" "}
-            {t('brokenHomeOrSingleParenting', language)}
-          </div>
-
-          <div>
-            <input
-              type="checkbox"
-              name="ACE_Early parental loss"
-              //   value="0"
-              checked={formData["ACE_Early parental loss"]}
-              onChange={handleInputChange}
-            />{" "}
-            {t('earlyParentalLoss', language)}
+          {/* Psychiatric Complications */}
+          <div className="question-section">
+            <h3 className="section-title">
+              <span className="section-icon">🧠</span>
+              {t('psychiatricComplication', language)}
+            </h3>
+            <div className="question">
+              <label>Select all that apply:</label>
+              <div className="input-group">
+                <input
+                  type="checkbox"
+                  name="Psy_Confusion"
+                  checked={formData["Psy_Confusion"]}
+                  onChange={handleInputChange}
+                  id="psy-confusion"
+                />
+                <label htmlFor="psy-confusion" className="option">
+                  {t('confusion', language)}
+                </label>
+                
+                <input
+                  type="checkbox"
+                  name="Psy_Hallucinations"
+                  checked={formData["Psy_Hallucinations"]}
+                  onChange={handleInputChange}
+                  id="psy-hallucinations"
+                />
+                <label htmlFor="psy-hallucinations" className="option">
+                  {t('hallucinations', language)}
+                </label>
+                
+                <input
+                  type="checkbox"
+                  name="Psy_Aggressive Outbursts"
+                  checked={formData["Psy_Aggressive Outbursts"]}
+                  onChange={handleInputChange}
+                  id="psy-aggressive"
+                />
+                <label htmlFor="psy-aggressive" className="option">
+                  {t('aggressiveOutbursts', language)}
+                </label>
+              </div>
+            </div>
           </div>
 
-          <div>
-            <input
-              type="checkbox"
-              name="ACE_Scholastic backwardness"
-              //   value="0"
-              checked={formData["ACE_Scholastic backwardness"]}
-              onChange={handleInputChange}
-            />{" "}
-            {t('scholasticBackwardness', language)}
+          {/* ACE (Adverse Childhood Experiences) */}
+          <div className="question-section">
+            <h3 className="section-title">
+              <span className="section-icon">👶</span>
+              {t('ace', language)}
+            </h3>
+            <div className="question">
+              <label>Select all that apply:</label>
+              <div className="input-group">
+                <input
+                  type="checkbox"
+                  name="ACE_Running away from home"
+                  checked={formData["ACE_Running away from home"]}
+                  onChange={handleInputChange}
+                  id="ace-running-away"
+                />
+                <label htmlFor="ace-running-away" className="option">
+                  {t('runningAwayFromHome', language)}
+                </label>
+                
+                <input
+                  type="checkbox"
+                  name="ACE_Broken home or single parenting"
+                  checked={formData["ACE_Broken home or single parenting"]}
+                  onChange={handleInputChange}
+                  id="ace-broken-home"
+                />
+                <label htmlFor="ace-broken-home" className="option">
+                  {t('brokenHomeOrSingleParenting', language)}
+                </label>
+                
+                <input
+                  type="checkbox"
+                  name="ACE_Early parental loss"
+                  checked={formData["ACE_Early parental loss"]}
+                  onChange={handleInputChange}
+                  id="ace-early-loss"
+                />
+                <label htmlFor="ace-early-loss" className="option">
+                  {t('earlyParentalLoss', language)}
+                </label>
+                
+                <input
+                  type="checkbox"
+                  name="ACE_Scholastic backwardness"
+                  checked={formData["ACE_Scholastic backwardness"]}
+                  onChange={handleInputChange}
+                  id="ace-scholastic"
+                />
+                <label htmlFor="ace-scholastic" className="option">
+                  {t('scholasticBackwardness', language)}
+                </label>
+                
+                <input
+                  type="checkbox"
+                  name="ACE_Poverty or severe debts"
+                  checked={formData["ACE_Poverty or severe debts"]}
+                  onChange={handleInputChange}
+                  id="ace-poverty"
+                />
+                <label htmlFor="ace-poverty" className="option">
+                  {t('povertyOrSevereDebts', language)}
+                </label>
+              </div>
+            </div>
           </div>
 
-          <div>
-            <input
-              type="checkbox"
-              name="ACE_Poverty or severe debts"
-              //   value="0"
-              checked={formData["ACE_Poverty or severe debts"]}
-              onChange={handleInputChange}
-            />{" "}
-            {t('povertyOrSevereDebts', language)}
+          {/* Stressors */}
+          <div className="question-section">
+            <h3 className="section-title">
+              <span className="section-icon">😰</span>
+              {t('stressors', language)}
+            </h3>
+            <div className="question">
+              <label>Select all that apply:</label>
+              <div className="input-group">
+                <input
+                  type="checkbox"
+                  name="S_Family or relationship issues"
+                  checked={formData["S_Family or relationship issues"]}
+                  onChange={handleInputChange}
+                  id="stress-family"
+                />
+                <label htmlFor="stress-family" className="option">
+                  {t('familyOrRelationshipIssues', language)}
+                </label>
+                
+                <input
+                  type="checkbox"
+                  name="S_Financial Stress"
+                  checked={formData["S_Financial Stress"]}
+                  onChange={handleInputChange}
+                  id="stress-financial"
+                />
+                <label htmlFor="stress-financial" className="option">
+                  {t('financialStress', language)}
+                </label>
+                
+                <input
+                  type="checkbox"
+                  name="S_Work related stress"
+                  checked={formData["S_Work related stress"]}
+                  onChange={handleInputChange}
+                  id="stress-work"
+                />
+                <label htmlFor="stress-work" className="option">
+                  {t('workRelatedStress', language)}
+                </label>
+                
+                <input
+                  type="checkbox"
+                  name="S_Reports Stressed but doesn't know where or what"
+                  checked={formData["S_Reports Stressed but doesn't know where or what"]}
+                  onChange={handleInputChange}
+                  id="stress-unknown"
+                />
+                <label htmlFor="stress-unknown" className="option">
+                  {t('reportsStressedButDoesNotKnow', language)}
+                </label>
+              </div>
+            </div>
           </div>
-        </div>
 
-        <div class="question">
-          <label>{t('stressors', language)}</label>
+          {/* Numerical Data */}
+          <div className="question-section">
+            <h3 className="section-title">
+              <span className="section-icon">📊</span>
+              Numerical Measurements
+            </h3>
+            
+            <div className="question">
+              <label>{t('aaoForAlcoholInYears', language)}</label>
+              <div className="number-input">
+                <input
+                  type="number"
+                  name="AAO for alcohol in years"
+                  value={formData["AAO for alcohol in years"]}
+                  onChange={handleInputChange}
+                  step="any"
+                  placeholder="Enter age in years"
+                />
+              </div>
+            </div>
 
-          <div>
-            <input
-              type="checkbox"
-              name="S_Family or relationship issues"
-              //   value="0"
-              checked={formData["S_Family or relationship issues"]}
-              onChange={handleInputChange}
-            />{" "}
-            {t('familyOrRelationshipIssues', language)}
+            <div className="question">
+              <label>{t('age', language)}</label>
+              <div className="number-input">
+                <input
+                  type="number"
+                  name="Age"
+                  value={formData["Age"]}
+                  onChange={handleInputChange}
+                  placeholder="Enter current age"
+                />
+              </div>
+            </div>
+
+            <div className="question">
+              <label>{t('weightWhileAdmission', language)}</label>
+              <div className="number-input">
+                <input
+                  type="number"
+                  name="Weight while admission (In Kg)"
+                  value={formData["Weight while admission (In Kg)"]}
+                  onChange={handleInputChange}
+                  placeholder="Enter weight in kg"
+                />
+              </div>
+            </div>
+
+            <div className="question">
+              <label>{t('durationOfUseOfAlcohol', language)}</label>
+              <div className="number-input">
+                <input
+                  type="number"
+                  name="duration of use of alcohol"
+                  value={formData["duration of use of alcohol"]}
+                  onChange={handleInputChange}
+                  placeholder="Enter duration in years"
+                />
+              </div>
+            </div>
+
+            <div className="question">
+              <label>{t('durationOfExcessiveUseOfAlcohol', language)}</label>
+              <div className="number-input">
+                <input
+                  type="number"
+                  name="duration of excessive use of alcohol"
+                  value={formData["duration of excessive use of alcohol"]}
+                  onChange={handleInputChange}
+                  placeholder="Enter duration in years"
+                />
+              </div>
+            </div>
+
+            <div className="question">
+              <label>{t('atWhatAgeDidYouStartWorking', language)}</label>
+              <div className="number-input">
+                <input
+                  type="number"
+                  name="At what age did you start working?"
+                  value={formData["At what age did you start working?"]}
+                  onChange={handleInputChange}
+                  placeholder="Enter starting age"
+                />
+              </div>
+            </div>
+
+            <div className="question">
+              <label>{t('howManyFirstDegreeRelativesHadSubstanceAddiction', language)}</label>
+              <div className="number-input">
+                <input
+                  type="number"
+                  name="How many first degree relatives had Substance addiction"
+                  value={formData["How many first degree relatives had Substance addiction"]}
+                  onChange={handleInputChange}
+                  placeholder="Enter number of relatives"
+                />
+              </div>
+            </div>
           </div>
 
-          <div>
-            <input
-              type="checkbox"
-              name="S_Financial Stress"
-              //   value="0"
-              checked={formData["S_Financial Stress"]}
-              onChange={handleInputChange}
-            />{" "}
-            {t('financialStress', language)}
+          <div className="submit-section">
+            <button type="submit">
+              {t('submit', language)} & Assess Risk
+            </button>
           </div>
+        </form>
+      </div>
 
-          <div>
-            <input
-              type="checkbox"
-              name="S_Work related stress"
-              //   value="0"
-              checked={formData["S_Work related stress"]}
-              onChange={handleInputChange}
-            />{" "}
-            {t('workRelatedStress', language)}
-          </div>
-
-          <div>
-            <input
-              type="checkbox"
-              name="S_Reports Stressed but doesn’t know where or what"
-              //   value="0"
-              checked={
-                formData["S_Reports Stressed but doesn’t know where or what"]
-              }
-              onChange={handleInputChange}
-            />{" "}
-            {t('reportsStressedButDoesNotKnow', language)}
-          </div>
-        </div>
-
-        <div class="question">
-          <label>{t('aaoForAlcoholInYears', language)}</label>
-          <div>
-            <input
-              type="number"
-              name="AAO for alcohol in years"
-              value={formData["AAO for alcohol in years"]}
-              onChange={handleInputChange}
-              step="any"
-            />
-          </div>
-        </div>
-
-        <div class="question">
-          <label>{t('age', language)}</label>
-          <div>
-            <input
-              type="number"
-              name="Age"
-              value={formData["Age"]}
-              onChange={handleInputChange}
-            />
-          </div>
-        </div>
-
-        <div class="question">
-          <label>{t('weightWhileAdmission', language)}</label>
-          <div>
-            <input
-              type="number"
-              name="Weight while admission (In Kg)"
-              value={formData["Weight while admission (In Kg)"]}
-              onChange={handleInputChange}
-            />
-          </div>
-        </div>
-
-        <div class="question">
-          <label>{t('durationOfUseOfAlcohol', language)}</label>
-          <div>
-            <input
-              type="number"
-              name="duration of use of alcohol"
-              value={formData["duration of use of alcohol"]}
-              onChange={handleInputChange}
-            />
-          </div>
-        </div>
-
-        <div class="question">
-          <label>{t('durationOfExcessiveUseOfAlcohol', language)}</label>
-          <div>
-            <input
-              type="number"
-              name="duration of excessive use of alcohol"
-              value={formData["duration of excessive use of alcohol"]}
-              onChange={handleInputChange}
-            />
-          </div>
-        </div>
-
-        <div class="question">
-          <label>{t('atWhatAgeDidYouStartWorking', language)}</label>
-          <div>
-            <input
-              type="number"
-              name="At what age did you start working?"
-              value={formData["At what age did you start working?"]}
-              onChange={handleInputChange}
-            />
-          </div>
-        </div>
-
-        <div class="question">
-          <label>
-            {t('howManyFirstDegreeRelativesHadSubstanceAddiction', language)}{" "}
-          </label>
-          <div>
-            <input
-              type="number"
-              name="How many first degree relatives had Substance addiction"
-              value={
-                formData[
-                  "How many first degree relatives had Substance addiction"
-                ]
-              }
-              onChange={handleInputChange}
-            />
-          </div>
-        </div>
-
-        <button type="submit">{t('submit', language)}</button>
-      </form>
       {outputData && (
         <div className="output-box">
-          <h4>{t('riskLevel', language)}: {outputData}</h4>
+          <div className="result-icon">🎯</div>
+          <h4>{t('riskLevel', language)}</h4>
+          <p className="result-value">{outputData}</p>
         </div>
       )}
     </div>

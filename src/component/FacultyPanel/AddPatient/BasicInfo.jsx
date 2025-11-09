@@ -4,6 +4,7 @@ import { useParams } from "react-router";
 import { useLanguage } from "../../../context/LanguageContext";
 import { t } from "../../../translations";
 import "./AddPatient.scss";
+import { motion } from "framer-motion";
 
 const years = { upper: 2010, lower: 1990 };
 
@@ -370,10 +371,20 @@ function BasicInfo({ setData, setStep, data }) {
   };
 
   return (
-    <div className="basic-info">
-      <div className="header">
+    <motion.div
+      className="basic-info"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6 }}
+    >
+      <motion.div
+        className="header"
+        initial={{ opacity: 0, scale: 0.9 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.6, delay: 0.2 }}
+      >
         <h2 className="w-100 text-center my-4">{t('basicInfo', language)}</h2>
-      </div>
+      </motion.div>
       <div className="row">
         <div className="col-sm-12 mb-3 col-lg-6">
           <label className="input-lebel">
@@ -1060,16 +1071,27 @@ function BasicInfo({ setData, setStep, data }) {
 
       <br />
 
-      <div className="row w-100 me-auto ml-auto">
+      <motion.div
+        className="row w-100 me-auto ml-auto"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.8 }}
+      >
         <div className="col-12">
           <div className="form_buttons">
-            <button className="btn btn-primary" onClick={() => nextStep()}>
+            <motion.button
+              className="btn btn-primary"
+              onClick={() => nextStep()}
+              whileHover={{ scale: 1.05, y: -2 }}
+              whileTap={{ scale: 0.95 }}
+              transition={{ duration: 0.2 }}
+            >
               {t('next', language)}
-            </button>
+            </motion.button>
           </div>
         </div>
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 }
 

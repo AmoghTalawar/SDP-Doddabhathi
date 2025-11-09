@@ -10,6 +10,7 @@ import PredictionModels from "../../component/FacultyPanel/AddPatient/Prediction
 import Loader from "../../component/Loader/Loader";
 import "./AddPatientPage.scss";
 import TabChange from "../../component/TabChange/TabChange";
+import { motion, AnimatePresence } from "framer-motion";
 
 const tabList = [
   {
@@ -52,62 +53,158 @@ function AddPatientPage() {
     setStep(newStep);
   };
 
+  const pageVariants = {
+    initial: { opacity: 0, x: 50 },
+    in: { opacity: 1, x: 0 },
+    out: { opacity: 0, x: -50 }
+  };
+
+  const pageTransition = {
+    type: "tween",
+    ease: "anticipate",
+    duration: 0.4
+  };
+
   return (
-    <div className="add-patient">
+    <motion.div
+      className="add-patient"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.6 }}
+    >
       {loading && <Loader />}
+
+      <motion.div
+        className="form-progress-header"
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.2 }}
+      >
+        <div className="progress-info">
+          <h2>Add New Patient</h2>
+          <p>Step {step} of {tabList.length}</p>
+        </div>
+        <div className="progress-bar">
+          <div
+            className="progress-fill"
+            style={{ width: `${(step / tabList.length) * 100}%` }}
+          ></div>
+        </div>
+      </motion.div>
+
       <TabChange tabList={tabList} setStep={handleStepChange} step={step} />
 
-      {step === 1 && (
-        <BasicInfo
-          prevData={false}
-          setData={setData}
-          data={data}
-          setStep={setStep}
-        />
-      )}
+      <div className="form-container">
+        <AnimatePresence mode="wait">
+          {step === 1 && (
+            <motion.div
+              key="step1"
+              initial="initial"
+              animate="in"
+              exit="out"
+              variants={pageVariants}
+              transition={pageTransition}
+            >
+              <BasicInfo
+                prevData={false}
+                setData={setData}
+                data={data}
+                setStep={setStep}
+              />
+            </motion.div>
+          )}
 
-      {step === 2 && (
-        <BasicInfo2
-          prevData={false}
-          setData={setData}
-          data={data}
-          setStep={setStep}
-          setLoading={setLoading}
-        />
-      )}
+          {step === 2 && (
+            <motion.div
+              key="step2"
+              initial="initial"
+              animate="in"
+              exit="out"
+              variants={pageVariants}
+              transition={pageTransition}
+            >
+              <BasicInfo2
+                prevData={false}
+                setData={setData}
+                data={data}
+                setStep={setStep}
+                setLoading={setLoading}
+              />
+            </motion.div>
+          )}
 
-      {step === 3 && (
-        <BasicInfo3
-          prevData={false}
-          setData={setData}
-          data={data}
-          setStep={setStep}
-          setLoading={setLoading}
-        />
-      )}
+          {step === 3 && (
+            <motion.div
+              key="step3"
+              initial="initial"
+              animate="in"
+              exit="out"
+              variants={pageVariants}
+              transition={pageTransition}
+            >
+              <BasicInfo3
+                prevData={false}
+                setData={setData}
+                data={data}
+                setStep={setStep}
+                setLoading={setLoading}
+              />
+            </motion.div>
+          )}
 
-      {step === 4 && (
-        <BasicInfo4
-          prevData={false}
-          setData={setData}
-          data={data}
-          setStep={setStep}
-          setLoading={setLoading}
-        />
-      )}
+          {step === 4 && (
+            <motion.div
+              key="step4"
+              initial="initial"
+              animate="in"
+              exit="out"
+              variants={pageVariants}
+              transition={pageTransition}
+            >
+              <BasicInfo4
+                prevData={false}
+                setData={setData}
+                data={data}
+                setStep={setStep}
+                setLoading={setLoading}
+              />
+            </motion.div>
+          )}
 
-      {step === 5 && (
-        <BasicInfo5
-          prevData={false}
-          setData={setData}
-          data={data}
-          setStep={setStep}
-          setLoading={setLoading}
-        />
-      )}
+          {step === 5 && (
+            <motion.div
+              key="step5"
+              initial="initial"
+              animate="in"
+              exit="out"
+              variants={pageVariants}
+              transition={pageTransition}
+            >
+              <BasicInfo5
+                prevData={false}
+                setData={setData}
+                data={data}
+                setStep={setStep}
+                setLoading={setLoading}
+              />
+            </motion.div>
+          )}
 
-      {step === 6 && <PredictionModels />}
-    </div>
+          {step === 6 && (
+            <motion.div
+              key="step6"
+              initial="initial"
+              animate="in"
+              exit="out"
+              variants={pageVariants}
+              transition={pageTransition}
+            >
+              <PredictionModels />
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+    </motion.div>
   );
 }
 

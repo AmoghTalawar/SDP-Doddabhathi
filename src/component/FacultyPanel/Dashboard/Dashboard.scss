@@ -116,6 +116,8 @@
 .patientData {
   min-height: 100vh;
   max-width: 100vw;
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  padding: 20px;
 
   .prediction-buttons {
     padding-top: 40px;
@@ -127,65 +129,146 @@
   }
 
   .header {
-    width: 70%;
+    width: 90%;
+    max-width: 1200px;
     margin: auto;
-    padding-top: 40px;
-
+    padding-top: 20px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    align-items: center;
 
     i {
-      font-size: 25px;
+      font-size: 28px;
       cursor: pointer;
+      color: #64748b;
+      transition: color 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      padding: 8px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+
+      &:hover {
+        color: #10b981;
+        box-shadow: 0 6px 20px rgba(16, 185, 129, 0.15);
+      }
+
+      &.logging-out {
+        animation: logoutPulse 0.6s ease-in-out;
+        pointer-events: none;
+      }
     }
   }
 
   .patient-list {
-    padding-top: 40px;
-    width: 70%;
+    padding-top: 30px;
+    width: 90%;
+    max-width: 1200px;
     margin: auto;
 
     .header {
       width: 100%;
       margin: auto;
-      padding-top: 40px;
-
+      padding: 30px 0;
       display: flex;
       flex-direction: row;
       justify-content: space-between;
+      align-items: center;
+      background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+      border-radius: 20px;
+      padding: 30px;
+      box-shadow: 0 8px 32px rgba(16, 185, 129, 0.08);
+      border: 1px solid rgba(16, 185, 129, 0.06);
     }
 
     h6 {
       margin-bottom: 0px;
-      color: var(--green);
-      font-size: 1.5em;
+      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-size: 1.8em;
+      font-weight: 700;
+      letter-spacing: -0.02em;
     }
 
     .patient {
-      border: solid 2px var(--gray4);
+      border: 1px solid rgba(16, 185, 129, 0.1);
+      background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
       display: flex;
-      border-radius: 5px;
-      padding: 10px;
+      border-radius: 16px;
+      padding: 24px;
       align-items: center;
-      margin-bottom: 15px;
+      margin-bottom: 16px;
       cursor: pointer;
+      transition: color 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 2px 8px rgba(16, 185, 129, 0.04);
+      position: relative;
+      overflow: hidden;
+
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(135deg, rgba(16, 185, 129, 0.02) 0%, rgba(14, 165, 233, 0.02) 100%);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+
+      &:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 40px rgba(16, 185, 129, 0.12);
+        border-color: rgba(16, 185, 129, 0.2);
+
+        &::before {
+          opacity: 1;
+        }
+      }
 
       p {
         margin: 0;
-        font-weight: 500;
+        font-weight: 600;
+        color: #1e293b;
+        font-size: 1.1em;
+        flex: 1;
       }
+
       .controls {
         margin-left: auto;
+        display: flex;
+        gap: 12px;
+
         button {
-          margin: 0 10px;
-          padding: 5px 10px;
+          margin: 0;
+          padding: 12px;
           border: 0;
-          background-color: transparent;
+          background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+          border-radius: 12px;
+          transition: all 0.3s ease;
+          box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
+
+          &:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.3);
+          }
+
+          &:active {
+            transform: scale(0.95);
+          }
 
           i {
-            color: var(--red);
-            font-size: 23px;
+            color: #ffffff;
+            font-size: 18px;
           }
         }
       }
@@ -193,21 +276,41 @@
   }
 
   .no-patient {
-    font-size: 1.25em;
+    font-size: 1.5em;
     font-weight: 600;
     text-align: center;
+    color: #64748b;
+    margin-top: 60px;
+    padding: 40px;
+    background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(16, 185, 129, 0.06);
+    border: 1px solid rgba(16, 185, 129, 0.08);
   }
 
   button {
-    padding: 5px 15px;
-    border-radius: 5px;
-    //   margin: 8px;
-    background-color: var(--green);
+    padding: 14px 28px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
     border: 0;
     color: #ffffff;
-    width: 20%;
+    font-weight: 600;
+    font-size: 1em;
     margin-bottom: 8px;
     margin-right: 8px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
+    cursor: pointer;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(16, 185, 129, 0.3);
+    }
+
+    &:active {
+      transform: translateY(0);
+      transform: scale(0.98);
+    }
   }
 
   .patient-list button {
@@ -234,10 +337,31 @@
 
 .buttons1 {
   display: flex;
+  align-items: center;
+  gap: 20px;
 
-  // background-color: aqua;
   button {
     width: 200px;
+    padding: 14px 24px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    border: 0;
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 1em;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
+    cursor: pointer;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(16, 185, 129, 0.3);
+    }
+
+    &:active {
+      transform: translateY(0);
+      transform: scale(0.98);
+    }
   }
 }
 
@@ -246,45 +370,72 @@
 }
 
 .input-wrap1 {
-  // size: 0cap;
-  height: 85%;
-  // margin-left: 49%;
+  height: 50px;
   display: flex;
-  padding: 0 1rem 0 1rem;
-  border-radius: 10px;
-  background-color: #c3073f;
+  align-items: center;
+  padding: 0 1rem;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
   box-sizing: border-box;
-  margin-left: 5%;
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.08);
+  border: 1px solid rgba(16, 185, 129, 0.1);
+  transition: all 0.3s ease;
+
+  &:focus-within {
+    box-shadow: 0 6px 20px rgba(16, 185, 129, 0.15);
+    border-color: rgba(16, 185, 129, 0.3);
+    transform: scale(1.02);
+  }
 }
 
 .input-wrap1 i {
-  // font-size: 1.5rem;
-  size: auto;
-  padding-top: 1%;
-  color: white;
-  height: 10%;
+  color: #64748b;
+  font-size: 1.2rem;
+  margin-right: 8px;
+  transition: color 0.3s ease;
+}
+
+.input-wrap1:focus-within i {
+  color: #10b981;
 }
 
 #product-search {
-  border-radius: 10px;
-  size: auto;
-  // font-size: 1.5rem;
-  color: #fff;
-  // width: 100%;
-  // height: 100%;
-  height: 90%;
-  padding: 0 0 0 1rem;
-  background: #c3073f;
+  border-radius: 12px;
+  flex: 1;
+  color: #1e293b;
+  height: 100%;
+  padding: 0;
+  background: transparent;
   border: none;
   outline: none;
-  font-weight: 700;
-}
+  font-weight: 500;
+  font-size: 1rem;
 
-#product-search::placeholder {
-  color: white;
-  // opacity: 0.8;
+  &::placeholder {
+    color: #94a3b8;
+    font-weight: 400;
+  }
+
+  &:focus {
+    &::placeholder {
+      color: #cbd5e1;
+    }
+  }
 }
 
 .fa-times:hover {
   cursor: pointer;
+  color: #ef4444;
+  transform: scale(1.1);
+}
+
+@keyframes logoutPulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0.7;
+  }
 }

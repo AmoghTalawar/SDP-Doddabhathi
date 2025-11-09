@@ -28,6 +28,7 @@ function Dashboard() {
   const [selected, setSelected] = useState("home");
   const [loading, setLoading] = useState(false);
   const [trigger, setTrigger] = useState(true);
+  const [isLoggingOut, setIsLoggingOut] = useState(false);
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -148,6 +149,22 @@ function Dashboard() {
     getData();
   }, [trigger]);
 
+  const handleLogout = async () => {
+    setIsLoggingOut(true);
+    try {
+      // Add a small delay for smooth transition
+      await new Promise(resolve => setTimeout(resolve, 300));
+      localStorage.clear();
+      navigate("/");
+    } catch (error) {
+      console.error("Logout error:", error);
+      localStorage.clear();
+      navigate("/");
+    } finally {
+      setIsLoggingOut(false);
+    }
+  };
+
   return (
     <div className="dashboard">
       {auth ? null : <Navigate replace to="login" />}
@@ -257,22 +274,19 @@ function Dashboard() {
             </ul>
           </li>
 
-          <li>
+          <li className="profile-details-wrapper">
             <div className="profile-details">
               <div className="profile-content">
-                <i class="bi bi-person-fill"></i>
+                <i class={`bi bi-person-fill ${isLoggingOut ? 'logging-out' : ''}`}></i>
               </div>
               <div className="name-job">
                 <div className="profile_name">{t('admin', language)}</div>
                 <div className="job">{t('authorizer', language)}</div>
               </div>
               <i
-                className="bx bx-log-out"
-                onClick={() => {
-                  localStorage.clear();
-                  navigate("/login");
-                  window.location.reload(false);
-                }}
+                className={`bx bx-log-out ${isLoggingOut ? 'logging-out' : ''}`}
+                onClick={handleLogout}
+                disabled={isLoggingOut}
               ></i>
             </div>
           </li>

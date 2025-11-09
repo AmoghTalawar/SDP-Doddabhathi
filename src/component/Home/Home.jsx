@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./Home.scss";
 import { BarChart } from "@mui/x-charts";
+import { motion } from "framer-motion";
 
 import { ADD_PATIENT } from "../../utils/apiConstant";
 import axios from "axios";
@@ -86,15 +87,34 @@ function Home({ locCount, facCount, campCount, patientCount }) {
   }, []);
 
   return (
-    <div className="admin-home">
-      <div className="header">
+    <motion.div
+      className="admin-home"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
+    >
+      <motion.div
+        className="header"
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.2 }}
+      >
         <h6 className="text-center w-100">
           {t('adminWelcome', language)}
         </h6>
-      </div>
+      </motion.div>
 
-      <div className="data-box">
-        <div className="stat-card">
+      <motion.div
+        className="data-box"
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.4 }}
+      >
+        <motion.div
+          className="stat-card"
+          whileHover={{ scale: 1.05, y: -5 }}
+          transition={{ duration: 0.3 }}
+        >
           <div className="stat-icon">
             <i className="fas fa-users"></i>
           </div>
@@ -102,8 +122,12 @@ function Home({ locCount, facCount, campCount, patientCount }) {
             <h6>{facCount - 1}</h6>
             <p>{t('totalCounsellors', language)}</p>
           </div>
-        </div>
-        <div className="stat-card">
+        </motion.div>
+        <motion.div
+          className="stat-card"
+          whileHover={{ scale: 1.05, y: -5 }}
+          transition={{ duration: 0.3 }}
+        >
           <div className="stat-icon">
             <i className="fas fa-user-injured"></i>
           </div>
@@ -111,11 +135,20 @@ function Home({ locCount, facCount, campCount, patientCount }) {
             <h6>{patientCount}</h6>
             <p>{t('totalPatients', language)}</p>
           </div>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
 
-      <div className="data-box chart-section">
-        <div className="chart-container">
+      <motion.div
+        className="data-box chart-section"
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.6 }}
+      >
+        <motion.div
+          className="chart-container"
+          whileHover={{ scale: 1.02 }}
+          transition={{ duration: 0.3 }}
+        >
           <h3>{t('patientAgeDistribution', language)}</h3>
           {patientList.length != 0 ? (
             <BarChart
@@ -137,7 +170,7 @@ function Home({ locCount, facCount, campCount, patientCount }) {
               series={[
                 {
                   data: patientList,
-                  color: '#667eea',
+                  color: '#10b981',
                   highlightScope: { faded: 'global', highlighted: 'item' },
                   faded: { innerRadius: 30, additionalRadius: -30, color: 'gray' },
                 },
@@ -150,9 +183,9 @@ function Home({ locCount, facCount, campCount, patientCount }) {
           ) : (
             <p>{t('noDataToDisplay', language)}</p>
           )}
-        </div>
-      </div>
-    </div>
+        </motion.div>
+      </motion.div>
+    </motion.div>
   );
 }
 

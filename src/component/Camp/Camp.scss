@@ -6,11 +6,19 @@
   min-height: 100vh;
 
   .header {
-    margin-bottom: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+    padding: 30px;
+    background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(16, 185, 129, 0.08);
+    border: 1px solid rgba(16, 185, 129, 0.06);
 
     h4 {
       color: #1e293b;
-      font-size: 2.5rem;
+      font-size: 2rem;
       font-weight: 700;
       margin: 0;
       background: linear-gradient(135deg, #10b981 0%, #059669 100%);
@@ -19,14 +27,6 @@
       background-clip: text;
       letter-spacing: -0.02em;
     }
-  }
-
-  .buttons {
-    display: flex;
-    gap: 20px;
-    align-items: center;
-    margin-bottom: 30px;
-    flex-wrap: wrap;
 
     .add-btn {
       padding: 14px 28px;
@@ -50,65 +50,6 @@
         transform: scale(0.98);
       }
     }
-
-    .input-wrap {
-      height: 50px;
-      display: flex;
-      align-items: center;
-      padding: 0 1rem;
-      border-radius: 12px;
-      background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
-      box-sizing: border-box;
-      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.08);
-      border: 1px solid rgba(16, 185, 129, 0.1);
-      transition: all 0.3s ease;
-
-      &:focus-within {
-        box-shadow: 0 6px 20px rgba(16, 185, 129, 0.15);
-        border-color: rgba(16, 185, 129, 0.3);
-        transform: scale(1.02);
-      }
-    }
-
-    .input-wrap i {
-      color: #64748b;
-      font-size: 1.2rem;
-      margin-right: 8px;
-      transition: color 0.3s ease;
-    }
-
-    .input-wrap:focus-within i {
-      color: #10b981;
-    }
-  }
-
-  #product-search {
-    flex: 1;
-    color: #1e293b;
-    height: 100%;
-    padding: 0;
-    background: transparent;
-    border: none;
-    outline: none;
-    font-weight: 500;
-    font-size: 1rem;
-
-    &::placeholder {
-      color: #94a3b8;
-      font-weight: 400;
-    }
-
-    &:focus {
-      &::placeholder {
-        color: #cbd5e1;
-      }
-    }
-  }
-
-  .fa-times:hover {
-    cursor: pointer;
-    color: #ef4444;
-    transform: scale(1.1);
   }
 
   .table-div {
@@ -162,32 +103,11 @@
               font-size: 1rem;
             }
 
-            &:last-child {
-              text-align: center;
-            }
-          }
-
-          .edit-btn {
-            padding: 10px 16px;
-            border-radius: 10px;
-            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-            border: none;
-            color: white;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
-
-            &:hover {
-              transform: scale(1.1);
-              box-shadow: 0 6px 20px rgba(16, 185, 129, 0.3);
-            }
-
-            &:active {
-              transform: scale(0.9);
-            }
-
-            i {
-              font-size: 1.1rem;
+            p {
+              margin: 0;
+              color: #374151;
+              font-weight: 500;
+              font-size: 1rem;
             }
           }
         }
@@ -217,19 +137,18 @@
 
 @media only screen and (max-width: 768px) {
   .content {
-    .buttons {
+    .header {
       flex-direction: column;
-      align-items: stretch;
-      gap: 15px;
+      gap: 20px;
+      text-align: center;
+
+      h4 {
+        font-size: 1.5rem;
+      }
 
       .add-btn {
         width: 100%;
-        margin-right: 0;
-      }
-
-      .input-wrap {
-        margin-left: 0;
-        width: 100%;
+        max-width: 200px;
       }
     }
 
@@ -250,8 +169,8 @@
   .content {
     padding: 15px;
 
-    .header h4 {
-      font-size: 1.8rem;
+    .header {
+      padding: 20px;
     }
 
     .table-div {

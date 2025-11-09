@@ -43,7 +43,7 @@ function Navbar(props) {
     <div className='navbar-div'>
       <nav className="navbar navbar-expand-lg navbar-light ">
         <div className="container-fluid">
-          <h2 style={{ color: "var(--red)", fontWeight: "600", textDecoration: "underline" }}>{t('hopeRecoveryCenter', language)}</h2>
+          <h2 style={{ color: "#059669", fontWeight: "600", textDecoration: "underline" }}>{t('hopeRecoveryCenter', language)}</h2>
           {/* <a className="navbar-brand" href="/#"><img src={logo} alt="" /></a> */}
           <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

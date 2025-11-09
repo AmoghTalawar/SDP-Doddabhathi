@@ -5,15 +5,15 @@
     position: fixed;
     width: 100vw;
     padding: 12px 0;
-    background: linear-gradient(180deg, #ffffff 0%, #fafbfc 100%);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.95) 0%, rgba(250, 251, 252, 0.95) 100%);
+    border-bottom: 1px solid rgba(16, 185, 129, 0.1);
+    box-shadow: 0 2px 12px rgba(16, 185, 129, 0.08);
     z-index: 2000;
-    backdrop-filter: blur(8px);
+    backdrop-filter: blur(12px);
     transition: all 0.3s ease;
 
     &:hover {
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 4px 16px rgba(16, 185, 129, 0.12);
     }
   }
 
@@ -45,7 +45,7 @@
     padding: 8px 0;
     font-weight: 500;
     font-size: 1.125em;
-    color: var(--gray4);
+    color: #1f2937;
     cursor: pointer;
     transition: all 0.2s ease;
     position: relative;
@@ -57,12 +57,12 @@
       left: 0;
       width: 0;
       height: 2px;
-      background: linear-gradient(90deg, var(--red), #d4073f);
+      background: linear-gradient(90deg, #10b981, #059669);
       transition: width 0.3s ease;
     }
 
     &:hover {
-      color: var(--black2);
+      color: #059669;
       font-weight: 600;
 
       &::after {
@@ -72,7 +72,7 @@
   }
 
   .nav-link.active {
-    color: var(--black2);
+    color: #059669;
     font-weight: 700;
 
     &::after {
@@ -100,8 +100,8 @@
   }
 
   .btn-register {
-    background: linear-gradient(135deg, var(--red) 0%, #d4073f 100%);
-    color: var(--white);
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    color: #ffffff;
     padding: 8px 18px;
     border-radius: 12px;
     font-weight: 600;
@@ -113,7 +113,7 @@
     border: none;
     transition: all 0.2s ease;
     cursor: pointer;
-    box-shadow: 0 4px 12px rgba(149, 7, 64, 0.25);
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.25);
 
     i {
       margin-right: 8px;
@@ -121,7 +121,8 @@
 
     &:hover {
       transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(149, 7, 64, 0.35);
+      box-shadow: 0 6px 20px rgba(16, 185, 129, 0.35);
+      background: linear-gradient(135deg, #059669 0%, #047857 100%);
     }
 
     &:active {
