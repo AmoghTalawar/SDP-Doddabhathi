@@ -115,37 +115,37 @@ function Category({ setLoading, faculty, setTrigger }) {
             {faculty
               ? faculty.map((data, key) => {
                   const translatedData = translatedFaculty?.find(tf => tf._id === data._id) || data;
-                  if (data.role !== "admin")
-                    return (
-                      <tr key={key}>
-                        <th scope="row">{key + 1}</th>
-                        <td>
-                          <p>{translatedData.translatedName || data.name}</p>
-                        </td>
-                        <td>
-                          <p>{translatedData.translatedRole || data.role}</p>
-                        </td>
-                        <td>
-                          <p>{translatedData.translatedEmail || data.email}</p>
-                        </td>
-                        <td>
-                          <p>***********</p>
-                        </td>
-                        <td>
-                          <button
-                            className="edit-btn"
-                            onClick={(e) => {
-                              e.preventDefault();
-                              setData(data);
-                              openModal();
-                            }}
-                          >
-                            <i class="bi bi-pencil-square"></i>
-                          </button>
-                        </td>
-                      </tr>
-                    );
-                })
+                  if (data.role === "admin") return null;
+                  return (
+                    <tr key={key}>
+                      <th scope="row">{key + 1}</th>
+                      <td>
+                        <p>{translatedData.translatedName || data.name}</p>
+                      </td>
+                      <td>
+                        <p>{translatedData.translatedRole || data.role}</p>
+                      </td>
+                      <td>
+                        <p>{translatedData.translatedEmail || data.email}</p>
+                      </td>
+                      <td>
+                        <p>***********</p>
+                      </td>
+                      <td>
+                        <button
+                          className="edit-btn"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            setData(data);
+                            openModal();
+                          }}
+                        >
+                          <i className="bi bi-pencil-square"></i>
+                        </button>
+                      </td>
+                    </tr>
+                  );
+                }).filter(Boolean)
               : null}
           </tbody>
         </table>

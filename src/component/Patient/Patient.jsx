@@ -298,7 +298,8 @@ function Patient({ setLoading, camp, patient, faculty }) {
                           if (d._id === data.faculty) {
                             return translatedData.translatedFaculty || d.name;
                           }
-                        })
+                          return null;
+                        }).filter(Boolean)
                       ) : (
                         "N/A"
                       )}
