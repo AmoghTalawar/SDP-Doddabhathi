@@ -16,8 +16,8 @@ function ViewPatient() {
     console.log("running");
     const data = JSON.parse(localStorage.getItem("patients"));
 
-    var filteredArray = data.filter(function (itm) {
-      return itm.faculty == id;
+    const filteredArray = data.filter(function (itm) {
+      return itm.faculty === id;
     });
 
     setPatientData(filteredArray);
@@ -25,31 +25,31 @@ function ViewPatient() {
 
   useEffect(() => {
     getPatients();
-  }, []);
+  }, [getPatients]);
 
   return (
     <div className="patientData">
       <div className="header">
         <i
-          class="bi bi-arrow-left-square-fill"
+          className="bi bi-arrow-left-square-fill"
           onClick={() => navigate("/faculty")}
         ></i>
       </div>
-      {patientData.length != 0 ? (
+      {patientData.length !== 0 ? (
         <div className="patient-list">
           <h6>{t('patientsList', language)}</h6>
           {patientData.map((data, key) => {
             return (
-              <div className="patient">
+              <div key={key} className="patient">
                 <p>
                   {data.name} - ({data.address}), {data.createdAt.split("T")[0]}{" "}
                 </p>
                 <div className="controls">
                   <button onClick={() => navigate(`/patient/${data._id}`)}>
-                    <i class="bi bi-eye"></i>
+                    <i className="bi bi-eye"></i>
                   </button>
                   <button onClick={() => navigate(`/patient/${data._id}`)}>
-                    <i class="bi bi-pencil-square"></i>
+                    <i className="bi bi-pencil-square"></i>
                   </button>
                 </div>
               </div>

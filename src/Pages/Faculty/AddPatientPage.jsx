@@ -44,7 +44,6 @@ function AddPatientPage() {
   const [loading, setLoading] = useState(false);
   const { id } = useParams();
   const [data, setData] = useState(null);
-  const [trigger, setTrigger] = useState(false);
 
   console.log("AddPatientPage - URL params id:", id);
 

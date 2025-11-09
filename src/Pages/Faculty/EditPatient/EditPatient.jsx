@@ -30,27 +30,20 @@ const tabList = [{
 ]
 
 function EditPatient() {
-  const [prevData, setPrevData] = useState();
-
   const [step, setStep] = useState(1);
-
-
-
   const { id } = useParams();
 
   const [data, setData] = useState({
     _id: id,
   });
 
-
-
   const getPatientData = () => {
     console.log(id);
     const patData = JSON.parse(localStorage.getItem("patients") || "[]");
 
     if (patData && patData.length > 0) {
-      var filteredArray = patData.filter(function (itm) {
-        return itm._id == id;
+      const filteredArray = patData.filter(function (itm) {
+        return itm._id === id;
       });
 
       if (filteredArray.length > 0) {
@@ -61,19 +54,17 @@ function EditPatient() {
 
   useEffect(() => {
     getPatientData();
-  }, []);
+  }, [getPatientData]);
 
   return (
     <div>
       {<TabChange tabList={tabList} setStep={setStep} step={step} />}
 
-      {step == 1 ? <BasicInfo prevData={true} data={data} setData={setData} setStep={setStep} /> : null}
-      {step == 2 ? <BasicInfo2 prevData={true} data={data} setData={setData} setStep={setStep} /> : null}
-      {step == 3 ? <BasicInfo3 prevData={true} data={data} setData={setData} setStep={setStep} /> : null}
-      {step == 4 ? <BasicInfo4 prevData={true} data={data} setData={setData} setStep={setStep} /> : null}
-      {step == 5 ? <BasicInfo5 prevData={true} data={data} setData={setData} setStep={setStep} /> : null}
-
-
+      {step === 1 && <BasicInfo prevData={true} data={data} setData={setData} setStep={setStep} />}
+      {step === 2 && <BasicInfo2 prevData={true} data={data} setData={setData} setStep={setStep} />}
+      {step === 3 && <BasicInfo3 prevData={true} data={data} setData={setData} setStep={setStep} />}
+      {step === 4 && <BasicInfo4 prevData={true} data={data} setData={setData} setStep={setStep} />}
+      {step === 5 && <BasicInfo5 prevData={true} data={data} setData={setData} setStep={setStep} />}
     </div>
   );
 }
